@@ -6,7 +6,7 @@ export default function Header() {
     <header className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50 shadow-sm">
       <nav className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="text-xl font-bold dark:text-white">
-          Your Name
+          Cristian-Robert Iosef
         </Link>
 
         <div className="flex items-center gap-6">
