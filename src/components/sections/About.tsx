@@ -22,11 +22,15 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              A dedicated frontend developer with 3 years of experience building
-              modern web applications.
+              Senior QA Automation Engineer with extensive experience in
+              creating and maintaining test automation frameworks. Specialized
+              in Java, Python, and JavaScript ecosystems with a focus on both
+              frontend and backend testing.
             </p>
             <p className="text-gray-600 dark:text-gray-300">
-              Currently focused on expanding my knowledge in cloud technologies.
+              Currently working at Deutsche Bank, focusing on continuous
+              improvement of automation strategies and frameworks while ensuring
+              high-quality software delivery.
             </p>
           </motion.div>
 
@@ -40,19 +44,22 @@ export default function About() {
             <div>
               <h3 className="font-semibold mb-2 dark:text-white">Location</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Your City, Country
+                Bucharest, Romania
               </p>
             </div>
             <div>
               <h3 className="font-semibold mb-2 dark:text-white">Email</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                your.email@example.com
+                roby248@live.com
               </p>
             </div>
             <div>
               <h3 className="font-semibold mb-2 dark:text-white">Education</h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Bachelor's in Computer Science
+                Master's degree in Leadership and Human Resources Management
+              </p>
+              <p className="text-gray-600 dark:text-gray-300">
+                Bachelor's in Management - Universitatea Hyperion
               </p>
             </div>
           </motion.div>

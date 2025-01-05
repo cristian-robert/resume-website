@@ -1,23 +1,70 @@
 "use client";
 import { motion } from "framer-motion";
 
-type Skill = {
+type SkillCategory = {
   category: string;
   items: string[];
 };
 
-const skills: Skill[] = [
+const skills: SkillCategory[] = [
   {
-    category: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "HTML/CSS"],
+    category: "Languages & Frameworks",
+    items: [
+      "Java",
+      "Python",
+      "JavaScript",
+      "SpringBoot",
+      "TestNG",
+      "JUnit",
+      "Cucumber",
+      "Selenium",
+      "RestAssured",
+      "PyTest",
+      "WebdriverIO",
+      "Cypress",
+      "PHP",
+    ],
   },
   {
-    category: "Backend",
-    items: ["Node.js", "Express", "REST APIs", "MongoDB"],
+    category: "Databases & Tools",
+    items: [
+      "MySQL",
+      "OracleSQL",
+      "PostgreSQL",
+      "Jenkins",
+      "TeamCity",
+      "GitlabCI",
+      "Docker",
+      "Git",
+      "BitBucket",
+      "HPALM",
+      "TestRail",
+      "JMeter",
+    ],
   },
   {
-    category: "Tools",
-    items: ["Git", "VS Code", "Figma", "Jest", "Webpack"],
+    category: "Testing Skills",
+    items: [
+      "Test Automation",
+      "API Testing",
+      "Microservices Testing",
+      "CI/CD",
+      "Agile Testing",
+      "Performance Testing",
+      "Security Testing",
+      "OWASP Top 10",
+    ],
+  },
+  {
+    category: "Certifications",
+    items: [
+      "Java: Automated API Testing with REST Assured",
+      "Java Object-Oriented Programming",
+      "Advanced Selenium: Support Classes",
+      "Learning Spring with Spring Boot",
+      "Advanced Java Development",
+      "Java: Lambdas and Streams",
+    ],
   },
 ];
 
@@ -26,23 +73,23 @@ export default function Skills() {
     <section id="skills" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-5xl mx-auto px-4">
         <motion.h2
+          className="text-3xl font-bold mb-8 dark:text-white"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-3xl font-bold mb-8 dark:text-white"
         >
-          Skills
+          Skills & Certifications
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {skills.map((skillGroup, index) => (
             <motion.div
               key={index}
+              className="space-y-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="space-y-4"
             >
               <h3 className="text-xl font-semibold dark:text-white">
                 {skillGroup.category}
