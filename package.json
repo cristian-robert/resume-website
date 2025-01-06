@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "prisma db seed",
-    "vercel-build": "prisma generate && next build && prisma db push && node prisma/seed.js"
+    "vercel-build": "prisma generate && prisma db push && next build"
   },
   "prisma": {
     "schema": "./prisma/schema.prisma",
