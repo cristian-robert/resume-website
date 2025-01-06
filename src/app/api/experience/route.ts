@@ -13,6 +13,8 @@ export async function GET() {
       { error: "Failed to fetch experiences" },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
