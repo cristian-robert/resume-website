@@ -1,5 +1,6 @@
+import { Skill } from "@/types/api";
 import { useApi } from "./useApi";
 
 export function useSkills() {
-  return useApi("/api/skills");
+  return useApi<Skill[]>("/api/skills");
 }
