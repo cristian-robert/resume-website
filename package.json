@@ -9,7 +9,7 @@
     "lint": "next lint",
     "seed": "prisma db seed",
     "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && prisma db push && next build"
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "prisma": {
     "schema": "./prisma/schema.prisma",
