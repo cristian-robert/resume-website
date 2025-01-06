@@ -7,9 +7,10 @@ export async function GET() {
       orderBy: { id: "desc" },
     });
     return NextResponse.json(experiences);
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
     return NextResponse.json(
-      { error: "Failed to fetch experiences" },
+      { error: err instanceof Error ? err.message : "Failed" },
       { status: 500 }
     );
   }
@@ -20,9 +21,10 @@ export async function POST(request: Request) {
     const data = await request.json();
     const experience = await prisma.experience.create({ data });
     return NextResponse.json(experience);
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
     return NextResponse.json(
-      { error: "Failed to create experience" },
+      { error: err instanceof Error ? err.message : "Failed" },
       { status: 500 }
     );
   }

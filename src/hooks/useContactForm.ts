@@ -25,7 +25,8 @@ export const useContactForm = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       setStatus("error");
     } finally {
       setIsLoading(false);
