@@ -14,23 +14,27 @@ export const useContactForm = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
     try {
-      // Here you would add your email service integration
-      // Example: EmailJS, SendGrid, or custom API endpoint
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to submit form";
+      console.error("Form submission error:", errorMessage);
+      setError(errorMessage);
       setStatus("error");
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { formData, setFormData, isLoading, status, handleSubmit };
+  return { formData, setFormData, isLoading, status, error, handleSubmit };
 };
