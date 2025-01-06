@@ -5,9 +5,12 @@ export async function GET() {
   try {
     const about = await prisma.about.findFirst();
     return NextResponse.json(about);
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Failed" },
+      { status: 500 }
+    );
   }
 }
 
@@ -16,8 +19,11 @@ export async function POST(request: Request) {
     const data = await request.json();
     const about = await prisma.about.create({ data });
     return NextResponse.json(about);
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Failed" },
+      { status: 500 }
+    );
   }
 }
