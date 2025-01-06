@@ -11,6 +11,8 @@ export async function GET() {
       { error: "Failed to fetch skills" },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
@@ -25,5 +27,7 @@ export async function POST(request: Request) {
       { error: "Failed to create skill" },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }

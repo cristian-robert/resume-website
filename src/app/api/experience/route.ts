@@ -29,5 +29,7 @@ export async function POST(request: Request) {
       { error: "Failed to create experience" },
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect();
   }
 }
