@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-
+// prisma/seed.js
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
@@ -25,13 +25,11 @@ async function main() {
         period: "Oct 2019 - Present",
         responsibilities: [
           "Writing and executing manual test cases",
-          "Check results of automated tests - reporting bugs and repairing tests",
+          "Check results of automated tests - reporting bugs and fixing failed tests",
           "Defining automation frameworks using Java, Selenium and other tools",
           "Active participation in continuous improvement of automation strategy",
-          "Performing code reviews on automated tests",
           "Frontend automation using Java, Selenium, SpringBoot, TestNG, Maven, OracleSQL",
           "Backend automation with Java, Cucumber, SpringBoot, TestNG, Maven, RestAssured",
-          "Participate in Daily scrum, Groomings and Plannings",
         ],
       },
       {
@@ -42,9 +40,8 @@ async function main() {
           "Creating test plans and test cases for Back Office, Payment, API",
           "Designing and implementing automated functional suites in Yii-Codeception",
           "Performing tests against builds and procedures",
-          "Debugging and error identification in server logs",
-          "Working with PHP-PHP Storm, Gitlab, Git, MySQL, Postman",
           "Security vulnerabilities scanning with OWASP top 10 focus",
+          "Working with PHP-PHP Storm, Gitlab, Git, MySQL, Postman",
         ],
       },
       {
@@ -56,7 +53,6 @@ async function main() {
           "Security and compliance testing",
           "Automated testing with PHPUnit and Behat",
           "Working in Agile environment with Kanban automation project",
-          "Following ISTQB best practices",
           "Using PHP, Jenkins, Git, MySQL, REST/SOAP APIs",
         ],
       },
@@ -144,10 +140,7 @@ async function main() {
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
+  .catch(console.error)
   .finally(async () => {
     await prisma.$disconnect();
   });
