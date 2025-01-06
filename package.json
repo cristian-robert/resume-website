@@ -13,7 +13,8 @@
   },
   "prisma": {
     "schema": "./prisma/schema.prisma",
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "clientOutput": "./prisma/generated/client"
   },
   "dependencies": {
     "@prisma/client": "^6.1.0",
