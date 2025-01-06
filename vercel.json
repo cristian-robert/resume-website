@@ -1,0 +1,8 @@
+{
+  "regions": ["lhr1"],
+  "build": {
+    "env": {
+      "VERCEL_REGION": "lhr1"
+    }
+  }
+}
