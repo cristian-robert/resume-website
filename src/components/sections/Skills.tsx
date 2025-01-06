@@ -1,74 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
-
-type SkillCategory = {
-  category: string;
-  items: string[];
-};
-
-const skills: SkillCategory[] = [
-  {
-    category: "Languages & Frameworks",
-    items: [
-      "Java",
-      "Python",
-      "JavaScript",
-      "SpringBoot",
-      "TestNG",
-      "JUnit",
-      "Cucumber",
-      "Selenium",
-      "RestAssured",
-      "PyTest",
-      "WebdriverIO",
-      "Cypress",
-      "PHP",
-    ],
-  },
-  {
-    category: "Databases & Tools",
-    items: [
-      "MySQL",
-      "OracleSQL",
-      "PostgreSQL",
-      "Jenkins",
-      "TeamCity",
-      "GitlabCI",
-      "Docker",
-      "Git",
-      "BitBucket",
-      "HPALM",
-      "TestRail",
-      "JMeter",
-    ],
-  },
-  {
-    category: "Testing Skills",
-    items: [
-      "Test Automation",
-      "API Testing",
-      "Microservices Testing",
-      "CI/CD",
-      "Agile Testing",
-      "Performance Testing",
-      "Security Testing",
-      "OWASP Top 10",
-    ],
-  },
-  {
-    category: "Certifications",
-    items: [
-      "Java: Automated API Testing with REST Assured",
-      "Java Object-Oriented Programming",
-      "Advanced Selenium: Support Classes",
-      "Learning Spring with Spring Boot",
-      "Advanced Java Development",
-      "Java: Lambdas and Streams",
-    ],
-  },
-];
+import { useSkills } from "@/hooks/useSkills";
 
 export default function Skills() {
+  const { data: skills, isLoading } = useSkills();
+
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <section id="skills" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-5xl mx-auto px-4">
@@ -82,7 +20,7 @@ export default function Skills() {
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {skills.map((skillGroup, index) => (
+          {skills?.map((skillGroup, index) => (
             <motion.div
               key={index}
               className="space-y-4"
@@ -98,11 +36,11 @@ export default function Skills() {
                 {skillGroup.items.map((skill, idx) => (
                   <motion.span
                     key={idx}
+                    className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-sm"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.2 + idx * 0.1 }}
-                    className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-sm"
                   >
                     {skill}
                   </motion.span>
