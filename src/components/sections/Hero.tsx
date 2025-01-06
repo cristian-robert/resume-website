@@ -13,7 +13,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="text-5xl font-bold mb-4 dark:text-white">
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="text-blue-600 dark:text-blue-400">
               Cristian-Robert Iosef
             </span>

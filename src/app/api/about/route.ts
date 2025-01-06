@@ -6,10 +6,8 @@ export async function GET() {
     const about = await prisma.about.findFirst();
     return NextResponse.json(about);
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch about data" },
-      { status: 500 }
-    );
+    console.error(error);
+    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
   }
 }
 
@@ -19,9 +17,7 @@ export async function POST(request: Request) {
     const about = await prisma.about.create({ data });
     return NextResponse.json(about);
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to create about data" },
-      { status: 500 }
-    );
+    console.error(error);
+    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
   }
 }
