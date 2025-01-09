@@ -43,5 +43,5 @@ export function useContactForm() {
     }
   };
 
-  return { formData, setFormData, isLoading, status, handleSubmit };
+  return { formData, setFormData, isLoading, status, error, handleSubmit };
 }
