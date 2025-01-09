@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-type FormData = {
+interface FormData {
   name: string;
   email: string;
   message: string;
-};
+}
 
-export const useContactForm = () => {
+export function useContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -14,27 +14,29 @@ export const useContactForm = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(null);
+    setStatus("idle");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error("Failed to send message");
+
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Failed to submit form";
-      console.error("Form submission error:", errorMessage);
-      setError(errorMessage);
+    } catch (error) {
       setStatus("error");
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { formData, setFormData, isLoading, status, error, handleSubmit };
-};
+  return { formData, setFormData, isLoading, status, handleSubmit };
+}
