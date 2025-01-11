@@ -28,20 +28,23 @@ export default function Header() {
   ) => {
     e.preventDefault();
     const targetId = href.replace("#", "");
-    const element = document.getElementById(targetId);
 
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+    setIsMenuOpen(false);
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+    // Delay scroll to allow menu close animation to complete
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
-      setIsMenuOpen(false);
-    }
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 100);
   };
 
   return (
