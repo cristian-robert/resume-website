@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useAbout } from "@/hooks/useAbout";
 
 export default function Hero() {
-  const { data: about, isLoading } = useAbout();
+  const { data: about } = useAbout();
 
   return (
     <section id="about" className="relative min-h-screen pt-16">

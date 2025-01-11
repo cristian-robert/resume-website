@@ -7,8 +7,7 @@ import { useContactForm } from "@/hooks/useContactForm";
 import { useState } from "react";
 
 export default function Contact() {
-  const { formData, setFormData, isLoading, status, handleSubmit } =
-    useContactForm();
+  const { formData, setFormData, isLoading, handleSubmit } = useContactForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({
     title: "",
