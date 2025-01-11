@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Modal from "../ui/Modal";
@@ -24,7 +23,7 @@ export default function Contact() {
         message: "Your message has been sent successfully.",
         type: "success",
       });
-    } catch (error) {
+    } catch {
       setModalContent({
         title: "Error",
         message: "Failed to send message. Please try again.",
