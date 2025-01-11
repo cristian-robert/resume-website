@@ -1,10 +1,38 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Modal from "../ui/Modal";
 import { useContactForm } from "@/hooks/useContactForm";
+import { useState } from "react";
 
 export default function Contact() {
-  const { formData, setFormData, isLoading, status, handleSubmit } =
-    useContactForm();
+  const { formData, setFormData, isLoading, handleSubmit } = useContactForm();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({
+    title: "",
+    message: "",
+    type: "success" as "success" | "error",
+  });
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await handleSubmit(e);
+      setModalContent({
+        title: "Success!",
+        message: "Your message has been sent successfully.",
+        type: "success",
+      });
+    } catch {
+      setModalContent({
+        title: "Error",
+        message: "Failed to send message. Please try again.",
+        type: "error",
+      });
+    } finally {
+      setIsModalOpen(true);
+    }
+  };
 
   return (
     <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
@@ -30,15 +58,22 @@ export default function Contact() {
               Feel free to reach out for opportunities or collaborations.
             </p>
             <div className="space-y-2 dark:text-gray-300">
-              <p>📧 roby248@live.com</p>
+              <p>📧 cristian-robert.iosef@outlook.com</p>
               <p>📍 Bucharest, Romania</p>
               <div className="flex gap-4 mt-4">
                 <a
                   href="https://linkedin.com/in/cristian-robert-iosef"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2"
                 >
+                  <Image
+                    src="/LinkedIn.png"
+                    alt="LinkedIn"
+                    width={24}
+                    height={24}
+                    className="w-6 h-6"
+                  />
                   LinkedIn
                 </a>
               </div>
@@ -46,11 +81,12 @@ export default function Contact() {
           </motion.div>
 
           <motion.form
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
             className="space-y-4"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
             <input
               type="text"
@@ -93,20 +129,15 @@ export default function Contact() {
             >
               {isLoading ? "Sending..." : "Send Message"}
             </button>
-
-            {status === "success" && (
-              <p className="text-green-500 dark:text-green-400">
-                Message sent successfully!
-              </p>
-            )}
-            {status === "error" && (
-              <p className="text-red-500 dark:text-red-400">
-                Failed to send message. Please try again.
-              </p>
-            )}
           </motion.form>
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        {...modalContent}
+      />
     </section>
   );
 }
