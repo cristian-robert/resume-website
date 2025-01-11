@@ -17,7 +17,7 @@ export default function Header() {
       // Find the current section
       let current = "";
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
+        const sectionTop = (section as HTMLElement).offsetTop;
         if (window.scrollY >= sectionTop - 100) {
           current = section.getAttribute("id") || "";
         }
