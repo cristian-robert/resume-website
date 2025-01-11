@@ -1,79 +1,69 @@
 "use client";
-import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-gray-900 text-white dark:bg-black">
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        <motion.div
-          className="grid md:grid-cols-3 gap-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+    <footer className="bg-[#0B1221] border-t border-[#1A2537] py-12">
+      <div className="container-custom">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Branding */}
           <div>
-            <h4 className="font-bold mb-4">Cristian-Robert Iosef</h4>
+            <h4 className="text-white font-bold mb-2">Cristian-Robert Iosef</h4>
             <p className="text-gray-400">Senior QA Automation Engineer</p>
           </div>
 
+          {/* Connect */}
           <div>
-            <h4 className="font-bold mb-4">Connect</h4>
+            <h4 className="text-white font-bold mb-4">Connect</h4>
             <div className="space-y-2">
               <a
                 href="https://linkedin.com/in/cristian-robert-iosef"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 hover:text-white transition-colors"
               >
                 LinkedIn
               </a>
               <a
-                href="mailto:roby248@live.com"
-                className="block text-gray-400 hover:text-white"
+                href="mailto:cristian-robert.iosef@outlook.com"
+                className="block text-gray-400 hover:text-white transition-colors"
               >
                 Email
               </a>
             </div>
           </div>
 
+          {/* Navigation */}
           <div>
-            <h4 className="font-bold mb-4">Navigation</h4>
+            <h4 className="text-white font-bold mb-4">Navigation</h4>
             <div className="space-y-2">
-              <a href="#about" className="block text-gray-400 hover:text-white">
+              <Link
+                href="#about"
+                className="block text-gray-400 hover:text-white transition-colors"
+              >
                 About
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#experience"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 hover:text-white transition-colors"
               >
                 Experience
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#skills"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 hover:text-white transition-colors"
               >
                 Skills
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#contact"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 hover:text-white transition-colors"
               >
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
-        </motion.div>
-
-        <motion.div
-          className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          © {currentYear} Cristian-Robert Iosef. All rights reserved.
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

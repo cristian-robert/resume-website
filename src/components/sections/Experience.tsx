@@ -13,10 +13,10 @@ export default function Experience() {
     return <ErrorState message="No experience data available" />;
 
   return (
-    <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-5xl mx-auto px-4">
+    <section id="experience">
+      <div className="container-custom">
         <motion.h2
-          className="text-3xl font-bold mb-12 text-center dark:text-white"
+          className="section-heading"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -24,33 +24,34 @@ export default function Experience() {
           Professional Experience
         </motion.h2>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {experiences?.map((exp, index) => (
             <motion.div
               key={index}
-              className="bg-white dark:bg-gray-700 p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-              initial={{ opacity: 0, y: 50 }}
+              className="bg-[#151E2E] rounded-lg p-8"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+              <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold dark:text-white">
+                  <h3 className="text-xl font-bold text-white mb-1">
                     {exp.title}
                   </h3>
-                  <p className="text-blue-600 dark:text-blue-400 text-lg">
-                    {exp.company}
-                  </p>
+                  <p className="text-blue-400">{exp.company}</p>
                 </div>
-                <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base mt-2 md:mt-0">
-                  {exp.period}
-                </p>
+                <span className="text-gray-400 text-sm">{exp.period}</span>
               </div>
-              <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+
+              <ul className="space-y-3">
                 {exp.responsibilities.map((resp, idx) => (
-                  <li key={idx} className="text-base leading-relaxed">
-                    {resp}
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2 text-gray-300"
+                  >
+                    <span className="text-blue-400 mt-1.5">•</span>
+                    <span>{resp}</span>
                   </li>
                 ))}
               </ul>
