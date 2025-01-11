@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useApi } from "@/hooks/useApi";
-import { ExternalLink, Star, GitFork, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import LoadingState from "../ui/LoadingState";
 import ErrorState from "../ui/ErrorState";
 import Image from "next/image";
