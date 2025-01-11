@@ -16,6 +16,7 @@ export default function Header() {
   }, []);
 
   const menuItems = [
+    { href: "#about", label: "About Me" },
     { href: "#experience", label: "Experience" },
     { href: "#skills", label: "Skills" },
     { href: "#contact", label: "Contact" },
