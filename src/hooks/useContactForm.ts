@@ -13,13 +13,13 @@ export function useContactForm() {
     message: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState<"success" | "error">("success");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setStatus("idle");
     setError(null);
     try {
       const response = await fetch("/api/email", {
@@ -30,18 +30,30 @@ export function useContactForm() {
 
       if (!response.ok) throw new Error("Failed to send message");
 
-      setStatus("success");
+      setToastType("success");
+      setShowToast(true);
       setFormData({ name: "", email: "", message: "" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Failed to submit form";
       console.error("Form submission error:", errorMessage);
       setError(errorMessage);
-      setStatus("error");
+      setToastType("error");
+      setShowToast(true);
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { formData, setFormData, isLoading, status, error, handleSubmit };
+  return {
+    formData,
+    setFormData,
+    isLoading,
+    showToast,
+    toastType,
+    setShowToast,
+    error,
+    handleSubmit,
+  };
 }

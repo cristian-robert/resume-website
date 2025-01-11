@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+
 export default function Hero() {
   return (
     <section className="min-h-screen pt-16 bg-gradient-to-b from-white via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
@@ -44,8 +45,14 @@ export default function Hero() {
               </a>
               <a
                 href="https://linkedin.com/in/cristian-robert-iosef"
-                className="w-full border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg text-lg font-medium"
+                className="w-full border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg text-lg font-medium flex items-center justify-center gap-2"
               >
+                <Image
+                  src="/LinkedIn.png"
+                  alt="LinkedIn"
+                  width={20}
+                  height={20}
+                />
                 LinkedIn Profile
               </a>
             </div>

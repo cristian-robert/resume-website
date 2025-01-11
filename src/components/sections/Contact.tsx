@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useContactForm } from "@/hooks/useContactForm";
+import Image from "next/image";
 
 export default function Contact() {
   const { formData, setFormData, isLoading, status, handleSubmit } =
@@ -30,15 +31,21 @@ export default function Contact() {
               Feel free to reach out for opportunities or collaborations.
             </p>
             <div className="space-y-2 dark:text-gray-300">
-              <p>📧 roby248@live.com</p>
+              <p>📧 cristian-robert.iosef@outlook.com</p>
               <p>📍 Bucharest, Romania</p>
               <div className="flex gap-4 mt-4">
                 <a
                   href="https://linkedin.com/in/cristian-robert-iosef"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-2"
                 >
+                  <Image
+                    src="/LinkedIn.png"
+                    alt="LinkedIn"
+                    width={16}
+                    height={16}
+                  />
                   LinkedIn
                 </a>
               </div>
