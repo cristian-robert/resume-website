@@ -1,17 +1,20 @@
 "use client";
 import { motion } from "framer-motion";
 import { useSkills } from "@/hooks/useSkills";
+import LoadingState from "../ui/LoadingState";
+import ErrorState from "../ui/ErrorState";
 
 export default function Skills() {
-  const { data: skills, isLoading } = useSkills();
+  const { data: skills, isLoading, error } = useSkills();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingState />;
+  if (error) return <ErrorState message={error} />;
 
   return (
-    <section id="skills" className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-5xl mx-auto px-4">
+    <section id="skills">
+      <div className="container-custom">
         <motion.h2
-          className="text-3xl font-bold mb-8 dark:text-white"
+          className="section-heading"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -19,28 +22,27 @@ export default function Skills() {
           Skills & Certifications
         </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {skills?.map((skillGroup, index) => (
+        <div className="space-y-12">
+          {skills?.map((category, index) => (
             <motion.div
               key={index}
-              className="space-y-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
+              transition={{ delay: index * 0.1 }}
             >
-              <h3 className="text-xl font-semibold dark:text-white">
-                {skillGroup.category}
+              <h3 className="text-xl font-medium text-white mb-4">
+                {category.category}
               </h3>
-              <div className="flex flex-wrap gap-2">
-                {skillGroup.items.map((skill, idx) => (
+              <div className="flex flex-wrap gap-3">
+                {category.items.map((skill, idx) => (
                   <motion.span
                     key={idx}
-                    className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-sm"
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    className="bg-[#1A2537] text-blue-400 px-4 py-1.5 rounded-lg text-sm hover:bg-[#1F2B3D] transition-colors"
+                    initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 + idx * 0.1 }}
+                    transition={{ delay: index * 0.1 + idx * 0.05 }}
                   >
                     {skill}
                   </motion.span>

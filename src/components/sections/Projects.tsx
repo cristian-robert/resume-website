@@ -1,20 +1,16 @@
 "use client";
 import { motion } from "framer-motion";
 import { useApi } from "@/hooks/useApi";
-import { ExternalLink } from "lucide-react";
+import { Github } from "lucide-react";
 import LoadingState from "../ui/LoadingState";
 import ErrorState from "../ui/ErrorState";
-import Image from "next/image";
 
 interface Project {
   id: number;
   name: string;
   description: string;
   url: string;
-  stars: number;
-  forks: number;
   language: string;
-  homepage: string;
 }
 
 export default function Projects() {
@@ -28,10 +24,10 @@ export default function Projects() {
   if (error) return <ErrorState message={error} />;
 
   return (
-    <section id="projects" className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4">
+    <section id="projects">
+      <div className="container-custom">
         <motion.h2
-          className="text-3xl font-bold mb-8 dark:text-white"
+          className="section-heading"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -41,59 +37,36 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects?.map((project, index) => (
-            <motion.div
+            <motion.a
               key={project.id}
-              className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#151E2E] rounded-lg p-6 group hover:bg-[#1A2537] transition-all duration-200"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold dark:text-white mb-2">
-                    {project.name}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
-                    {project.description}
-                  </p>
-                </div>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                >
-                  <Image
-                    src="/github.svg"
-                    alt="GitHub"
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 dark:invert"
-                  />
-                </a>
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-lg font-medium text-white group-hover:text-blue-400 transition-colors">
+                  {project.name}
+                </h3>
+                <Github className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
               </div>
 
-              <div className="flex items-center gap-4 mb-4">
-                {project.language && (
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
-                    {project.language}
-                  </span>
-                )}
-              </div>
-
-              {project.homepage && (
-                <a
-                  href={project.homepage}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Live Demo
-                </a>
+              {project.description && (
+                <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+                  {project.description}
+                </p>
               )}
-            </motion.div>
+
+              {project.language && (
+                <span className="text-sm text-gray-400">
+                  {project.language}
+                </span>
+              )}
+            </motion.a>
           ))}
         </div>
       </div>
