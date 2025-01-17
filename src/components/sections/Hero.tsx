@@ -2,9 +2,12 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useAbout } from "@/hooks/useAbout";
+import HeroLoading from "../animation/loading-states";
 
 export default function Hero() {
-  const { data: about } = useAbout();
+  const { data: about, isLoading } = useAbout();
+  if (isLoading) return <HeroLoading />;
+
   const sectionId = "aboutMe";
 
   const createMarkup = (content: string) => {
@@ -14,20 +17,23 @@ export default function Hero() {
   return (
     <section id={sectionId} className="min-h-screen pt-20 bg-[#0B1221]">
       <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="relative aspect-[4/5] rounded-lg overflow-hidden">
-              <Image
-                src="/profile-placeholder.jpg"
-                alt="Cristian-Robert Iosef"
-                fill
-                className="object-cover"
-                priority
-              />
+            <div className="relative w-full max-w-[280px] md:max-w-full mx-auto rounded-lg overflow-hidden">
+              <div className="relative aspect-[4/5] md:aspect-[4/5]">
+                <Image
+                  src="/profile-placeholder.jpg"
+                  alt="Cristian-Robert Iosef"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 280px, 100vw"
+                />
+              </div>
             </div>
           </motion.div>
 
@@ -46,6 +52,7 @@ export default function Hero() {
               <h3 className="text-blue-400 font-medium text-lg mb-4">
                 About Me
               </h3>
+
               <div
                 className="text-gray-300"
                 dangerouslySetInnerHTML={createMarkup(about?.description || "")}
