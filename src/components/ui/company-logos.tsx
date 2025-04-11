@@ -19,70 +19,72 @@ export function CompanyLogo({ company, className = "", size = 24 }: CompanyLogoP
     const containerStyle = {
       width: imageSize,
       height: imageSize,
-      padding: '2px', // Add some padding to prevent logos from touching the edges
     };
 
-    // Common image styles for all logos
-    const imageClassName = `object-contain ${className}`;
+    // Common image styles for all logos - using object-contain to maintain aspect ratio
+    const imageClassName = `object-contain w-full h-full ${className}`;
+
+    // No scaling to keep logos intelligible
+    const imageStyle = {};
 
     // Logo-specific adjustments
     if (companyLower.includes("deutsche bank")) {
       return (
-        <div className="relative" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
           <Image
             src="/dblogo.png"
             alt="Deutsche Bank"
             fill
             className={imageClassName}
-            style={{ padding: '2px' }} // DB logo needs a bit more padding
+            style={imageStyle}
           />
         </div>
       );
     } else if (companyLower.includes("twispay")) {
       return (
-        <div className="relative" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
           <Image
             src="/twispaylogo.jpeg"
             alt="Twispay"
             fill
             className={imageClassName}
-            style={{ padding: '3px' }} // Twispay logo needs more padding
+            style={imageStyle}
           />
         </div>
       );
     } else if (companyLower.includes("2checkout") || companyLower.includes("verifone")) {
       return (
-        <div className="relative" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
           <Image
             src="/2checkout.png"
             alt="2Checkout"
             fill
             className={imageClassName}
-            style={{ padding: '2px' }}
+            style={imageStyle}
           />
         </div>
       );
     } else if (companyLower.includes("emag")) {
       return (
-        <div className="relative" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
           <Image
             src="/emaglogo.avif"
             alt="eMAG"
             fill
             className={imageClassName}
-            style={{ padding: '2px' }}
+            style={imageStyle}
           />
         </div>
       );
     } else if (companyLower.includes("ubisoft")) {
       return (
-        <div className="relative" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
           <Image
             src="/ubisoftlogo.png"
             alt="Ubisoft"
             fill
             className={imageClassName}
-            style={{ padding: '2px' }}
+            style={imageStyle}
           />
         </div>
       );

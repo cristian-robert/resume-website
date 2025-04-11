@@ -72,9 +72,8 @@ export default function Experience() {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
-                  style={{ padding: '2px' }}
                 >
-                  <div className="rounded-full overflow-hidden w-full h-full flex items-center justify-center bg-white dark:bg-gray-800">
+                  <div className="rounded-full overflow-hidden w-full h-full flex items-center justify-center">
                     <CompanyLogo company={exp.company} size={24} />
                   </div>
                 </motion.div>
