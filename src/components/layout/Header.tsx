@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import ThemeToggle from "../theme/ThemeToggle";
+// Theme toggle removed
 import { Menu, User, Briefcase, Code, Mail, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -127,7 +127,6 @@ export default function Header() {
             <SignedIn>
               <UserButton />
             </SignedIn>
-            <ThemeToggle />
           </div>
 
           {/* Mobile Navigation */}
@@ -145,7 +144,6 @@ export default function Header() {
             <SignedIn>
               <UserButton />
             </SignedIn>
-            <ThemeToggle />
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" aria-label="Menu">

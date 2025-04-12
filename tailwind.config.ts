@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
+const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
+
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -108,6 +110,14 @@ const config: Config = {
   				'100%': {
   					transform: 'translate(0px, 0px) scale(1)'
   				}
+  			},
+  			aurora: {
+  				from: {
+  					backgroundPosition: '50% 50%, 50% 50%'
+  				},
+  				to: {
+  					backgroundPosition: '350% 50%, 350% 50%'
+  				}
   			}
   		},
   		animation: {
@@ -115,7 +125,8 @@ const config: Config = {
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'gradient-x': 'gradient-x 15s ease infinite',
   			blob: 'blob 7s infinite',
-  			pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+  			pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+  			aurora: 'aurora 60s linear infinite'
   		},
   		typography: {
   			DEFAULT: {
@@ -123,9 +134,26 @@ const config: Config = {
   					maxWidth: '100%'
   				}
   			}
+  		},
+  		backgroundImage: {
+  			'grid-pattern': 'linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)',
+  			'grid-pattern-light': 'linear-gradient(to right, #80808008 1px, transparent 1px), linear-gradient(to bottom, #80808008 1px, transparent 1px)'
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography"), addVariablesForColors],
 };
 export default config;
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
+

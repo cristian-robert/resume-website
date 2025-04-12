@@ -1,11 +1,11 @@
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Inter } from "next/font/google";
 import Header from "@/components/layout/Header";
 import "./globals.css";
 import BackToTop from "@/components/layout/BackToTop";
 import Footer from "@/components/layout/Footer";
 import ConsentManager from "@/components/privacy/consent-manager";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({
@@ -16,15 +16,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider>
-          <ClerkProvider>
+        <ClerkProvider>
+          <AuroraBackground>
             <Header />
             {children}
             <Footer />
             <BackToTop />
             <ConsentManager />
-          </ClerkProvider>
-        </ThemeProvider>
+          </AuroraBackground>
+        </ClerkProvider>
       </body>
     </html>
   );

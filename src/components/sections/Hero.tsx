@@ -7,12 +7,7 @@ import SectionLayout from "@/components/layout/SectionLayout";
 export default function Hero() {
   return (
     <SectionLayout className="min-h-screen pt-16 flex items-center overflow-hidden">
-      {/* Geometric patterns */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-5 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-        <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-        <div className="absolute bottom-1/4 right-1/3 w-64 h-64 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
-      </div>
+      {/* Geometric patterns removed to use aurora background */}
 
       <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
         <motion.div
@@ -83,7 +78,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full blur-2xl opacity-20 animate-pulse" />
+          {/* Background gradient removed to use aurora background */}
           <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-white/10 dark:border-black/10 shadow-2xl">
             <Image
               src="/profile-placeholder.jpg"

@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --transparent: transparent;
+    --white: 255, 255, 255;
+    --black: 0, 0, 0;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -61,10 +64,10 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-[hsl(var(--border))];
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-transparent text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -101,11 +104,63 @@ section {
 }
 
 /* Timeline custom styles */
+.timeline-custom {
+  --dot-size: 3rem;
+  --line-width: 0.125rem;
+  --dot-position: 1.5rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Timeline Styles */
+.custom-timeline-line {
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: hsl(var(--border));
+  z-index: 0;
+}
+
+.timeline-custom > li {
+  display: grid;
+  grid-template-columns: var(--dot-size) 1fr !important;
+  grid-template-rows: auto 1fr !important;
+  position: relative;
+  margin-bottom: 3rem !important;
+  column-gap: 1.5rem !important;
+}
+
+/* Override the default grid columns from the shadcn timeline */
+.timeline-custom > li[class*='grid-cols'],
+.timeline-custom > li.timeline-item-custom {
+  grid-template-columns: var(--dot-size) 1fr !important;
+  display: grid !important;
+  position: relative !important;
+}
+
+/* Ensure all timeline items have the same structure */
+.timeline-item-custom {
+  display: grid !important;
+  grid-template-columns: var(--dot-size) 1fr !important;
+  position: relative !important;
+}
+
 .timeline-dot {
   position: relative;
   z-index: 10;
-  width: 3rem !important;
-  height: 3rem !important;
+  width: var(--dot-size) !important;
+  height: var(--dot-size) !important;
   border-radius: 9999px;
   background-color: hsl(var(--background));
   border: 1px solid hsl(var(--border));
@@ -114,6 +169,9 @@ section {
   justify-content: center;
   overflow: hidden;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  justify-self: start !important;
 }
 
 .dark .timeline-dot {
@@ -123,11 +181,36 @@ section {
 }
 
 /* Timeline line styles */
-[role="separator"] {
+.timeline-custom [role="separator"] {
   background-color: hsl(var(--border));
-  min-height: 6rem !important;
+  position: absolute !important;
+  width: var(--line-width) !important;
+  height: calc(100% + 3rem) !important;
+  left: calc(var(--dot-size) / 2) !important;
+  top: var(--dot-size) !important;
+  transform: translateX(-50%) !important;
+  z-index: 1 !important;
 }
 
-.dark [role="separator"] {
+/* Force all timeline items to have the same structure */
+.timeline-custom li {
+  grid-template-columns: var(--dot-size) 1fr !important;
+}
+
+.dark .timeline-custom [role="separator"] {
   background-color: hsl(var(--border));
+}
+
+/* Content positioning */
+.timeline-custom [class*="timelineContent"] {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Heading positioning */
+.timeline-custom [role="heading"] {
+  grid-column: 2 !important;
+  text-align: left !important;
+  margin-left: 0 !important;
 }

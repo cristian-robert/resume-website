@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CompanyLogo } from "@/components/ui/company-logos";
 import { ChevronDown, ChevronUp, Calendar, Briefcase } from "lucide-react";
-import { Timeline, TimelineItem, TimelineDot, TimelineContent, TimelineHeading, TimelineLine } from "@/components/ui/timeline";
+import { CustomTimeline, CustomTimelineItem, CustomTimelineContent, CustomTimelineTitle } from "@/components/ui/custom-timeline";
 import LoadingState from "../ui/LoadingState";
 import ErrorState from "../ui/ErrorState";
 
@@ -42,32 +42,23 @@ export default function Experience() {
       </motion.div>
 
       <div className="max-w-4xl mx-auto">
-        <Timeline positions="left">
+        <CustomTimeline>
           {experiences?.map((exp, index) => {
             const isExpanded = expandedId === exp.id;
-            const isLast = index === experiences.length - 1;
 
             return (
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+              <div
+                key={exp.id}
+                style={{
+                  opacity: 0,
+                  transform: 'translateY(50px)',
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.2}s forwards`
+                }}
               >
-                <TimelineItem key={exp.id} className="mb-12">
-                  <TimelineDot
-                    status="custom"
-                    className="shadow-md border-primary/20 z-10"
-                    customIcon={
-                      <div className="rounded-full overflow-hidden w-full h-full flex items-center justify-center bg-background dark:bg-gray-900">
-                        <CompanyLogo company={exp.company} size={24} />
-                      </div>
-                    }
-                  />
-
-                  {!isLast && <TimelineLine className="bg-primary/20" />}
-
-                  <TimelineContent side="right">
+                <CustomTimelineItem
+                  icon={<CompanyLogo company={exp.company} size={29} />}
+                >
+                  <CustomTimelineContent>
                     <motion.div
                       className="flex-1"
                       initial={{ opacity: 0, x: 20 }}
@@ -75,9 +66,9 @@ export default function Experience() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.3 }}
                     >
-                    <TimelineHeading side="right" variant="primary" className="text-xl font-bold mb-1">
+                    <CustomTimelineTitle>
                       {exp.title}
-                    </TimelineHeading>
+                    </CustomTimelineTitle>
 
                     <div className="flex items-center gap-1 text-primary font-medium mb-1">
                       <Briefcase className="h-4 w-4" />
@@ -160,12 +151,12 @@ export default function Experience() {
                       </CardContent>
                     </Card>
                   </motion.div>
-                </TimelineContent>
-              </TimelineItem>
-              </motion.div>
+                  </CustomTimelineContent>
+                </CustomTimelineItem>
+              </div>
             );
           })}
-        </Timeline>
+        </CustomTimeline>
       </div>
     </SectionLayout>
   );
