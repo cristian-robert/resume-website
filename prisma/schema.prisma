@@ -7,7 +7,6 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
-
 }
 
 model About {
@@ -31,4 +30,46 @@ model Skills {
   id       Int      @id @default(autoincrement())
   category String
   items    String[]
+}
+
+// GDPR Compliance Models
+model UserConsent {
+  userId     String   @id
+  essential  Boolean  @default(true)
+  functional Boolean  @default(false)
+  analytics  Boolean  @default(false)
+  marketing  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model UserConsentHistory {
+  id         Int      @id @default(autoincrement())
+  userId     String
+  essential  Boolean
+  functional Boolean
+  analytics  Boolean
+  marketing  Boolean
+  timestamp  DateTime
+  
+  @@index([userId])
+}
+
+// Authentication Extension Models
+model ClerkUser {
+  id             String   @id
+  email          String?  @unique
+  emailVerified  Boolean  @default(false)
+  lastActivityAt DateTime @default(now())
+  createdAt      DateTime @default(now())
+  
+  @@index([email])
+}
+
+model AccountDeletion {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  reason    String?
+  requestedAt DateTime @default(now())
+  completedAt DateTime?
 }

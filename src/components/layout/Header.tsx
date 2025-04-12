@@ -6,6 +6,7 @@ import ThemeToggle from "../theme/ThemeToggle";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { SignInButton, SignUpButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 type Section = "hero" | "about" | "experience" | "skills" | "contact";
 
@@ -89,11 +90,43 @@ export default function Header() {
               )}
             </Link>
           ))}
-          <ThemeToggle />
+          
+          {/* Auth buttons */}
+          <div className="flex items-center gap-2 ml-2">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button variant="ghost" size="sm">
+                  Log in
+                </Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button variant="outline" size="sm">
+                  Sign up
+                </Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-2">
+          <SignedOut>
+            <SignInButton mode="modal">
+              <Button variant="ghost" size="icon" className="h-8 w-8">
+                <span className="sr-only">Log in</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3" />
+                </svg>
+              </Button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
           <ThemeToggle />
           <Sheet>
             <SheetTrigger asChild>
@@ -112,6 +145,15 @@ export default function Header() {
                     {item.label}
                   </Link>
                 ))}
+                
+                {/* Mobile auth button (only SignUp shows in sheet) */}
+                <SignedOut>
+                  <SignUpButton mode="modal">
+                    <Button className="w-full mt-2">
+                      Create account
+                    </Button>
+                  </SignUpButton>
+                </SignedOut>
               </nav>
             </SheetContent>
           </Sheet>
