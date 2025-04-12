@@ -14,18 +14,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-        <body className={inter.className}>
-          <ThemeProvider>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider>
+          <ClerkProvider>
             <Header />
             {children}
             <Footer />
             <BackToTop />
             <ConsentManager />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+          </ClerkProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

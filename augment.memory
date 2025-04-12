@@ -1,0 +1,27 @@
+# Resume Website Project Memory
+
+## UI Components and Styling
+- Added shadcn Dialog and Switch components which created a components.json file in the project.
+- Dialog components require a DialogTitle for accessibility, or it should be wrapped with a VisuallyHidden component.
+- Fixed UI issues in resume website including timeline component styling, and color contrast improvements.
+- Implemented a floating navbar from 21st.dev in the resume website, including animation effects.
+- Fixed accessibility issues in resume website by adding DialogTitle to Sheet components and updating ConsentManager to use Dialog component from Radix UI.
+- Installed shadcn timeline component from 21st.dev using `npx shadcn@latest add "https://21st.dev/r/nyxbui/timeline"`.
+
+## Dark Mode
+- Fixed dark mode in resume website by correcting darkMode configuration in tailwind.config.ts.
+- The correct configuration is `darkMode: "class"` instead of `darkMode: ["class", "class"]`.
+- Dark mode was broken after adding components.json file from shadcn components.
+
+## Animations
+- Added scroll animations to Experience section using framer-motion's whileInView feature.
+- Timeline items animate in from the bottom with staggered delays.
+- Content slides in from the right with a slight delay for a polished look.
+- Used viewport detection with margin to start animations before elements are fully visible.
+
+## Authentication and Database
+- Fixed import and model name issues in user consent routes, changing from @/lib/db to @/lib/prisma and updating auth import from Clerk.
+
+## Codebase Management
+- User prefers a clean codebase and wants to remove unused files and components.
+- User prefers using shadcn components from 21st.dev.

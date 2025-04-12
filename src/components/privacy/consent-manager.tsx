@@ -2,6 +2,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useClerk } from "@clerk/nextjs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface ConsentPreferences {
   essential: boolean;
@@ -19,7 +26,7 @@ export default function ConsentManager() {
     analytics: false,
     marketing: false
   });
-  
+
   useEffect(() => {
     // Check if consent was previously given
     const storedConsent = localStorage.getItem("cookieConsent");
@@ -29,14 +36,14 @@ export default function ConsentManager() {
       setPreferences(JSON.parse(storedConsent));
     }
   }, []);
-  
+
   const savePreferences = async () => {
     const timestamp = new Date().toISOString();
     localStorage.setItem("cookieConsent", JSON.stringify({
       ...preferences,
       timestamp
     }));
-    
+
     // Also store on server for logged-in users
     if (user) {
       try {
@@ -52,40 +59,47 @@ export default function ConsentManager() {
         console.error("Failed to save consent preferences", error);
       }
     }
-    
+
     setOpen(false);
   };
-  
+
   const updatePreference = (key: keyof ConsentPreferences, value: boolean) => {
     setPreferences(prev => ({
       ...prev,
       [key]: value
     }));
   };
-  
-  if (!open) {
-    return (
-      <Button
-        onClick={() => setOpen(true)}
-        variant="outline"
-        size="sm"
-        className="fixed bottom-4 left-4 z-50"
-      >
-        Cookie Settings
-      </Button>
-    );
-  }
-  
+
+  const rejectAll = () => {
+    setPreferences({
+      essential: true,
+      functional: false,
+      analytics: false,
+      marketing: false
+    });
+    savePreferences();
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-background max-w-md w-full rounded-lg shadow-lg p-6">
-        <h2 className="text-xl font-bold mb-4">Cookie Preferences</h2>
-        
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button
+          variant="outline"
+          size="sm"
+          className="fixed bottom-4 left-4 z-50"
+        >
+          Cookie Settings
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Cookie Preferences</DialogTitle>
+        </DialogHeader>
         <div className="py-4">
           <div className="text-sm text-muted-foreground mb-4">
             We use cookies to improve your experience on our website. Please select which cookies you allow us to use.
           </div>
-          
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
@@ -94,14 +108,14 @@ export default function ConsentManager() {
                   Required for the website to function. Cannot be disabled.
                 </div>
               </div>
-              <input 
-                type="checkbox" 
-                checked={true} 
-                disabled 
-                className="h-4 w-4" 
+              <input
+                type="checkbox"
+                checked={true}
+                disabled
+                className="h-4 w-4"
               />
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <div className="text-base font-medium">Functional Cookies</div>
@@ -109,14 +123,14 @@ export default function ConsentManager() {
                   Allow us to remember your preferences and settings.
                 </div>
               </div>
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 checked={preferences.functional}
                 onChange={(e) => updatePreference('functional', e.target.checked)}
-                className="h-4 w-4" 
+                className="h-4 w-4"
               />
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <div className="text-base font-medium">Analytics Cookies</div>
@@ -124,14 +138,14 @@ export default function ConsentManager() {
                   Help us improve by collecting anonymous usage data.
                 </div>
               </div>
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 checked={preferences.analytics}
                 onChange={(e) => updatePreference('analytics', e.target.checked)}
-                className="h-4 w-4" 
+                className="h-4 w-4"
               />
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <div className="text-base font-medium">Marketing Cookies</div>
@@ -139,30 +153,30 @@ export default function ConsentManager() {
                   Used to deliver relevant content and advertisements.
                 </div>
               </div>
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 checked={preferences.marketing}
                 onChange={(e) => updatePreference('marketing', e.target.checked)}
-                className="h-4 w-4" 
+                className="h-4 w-4"
               />
             </div>
           </div>
+
+          <div className="flex justify-end space-x-2 mt-4">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={rejectAll}
+              className="mr-2"
+            >
+              Reject All
+            </Button>
+            <Button type="button" onClick={savePreferences}>
+              Save Preferences
+            </Button>
+          </div>
         </div>
-        
-        <div className="flex justify-end space-x-2 mt-4">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={() => setOpen(false)}
-            className="mr-2"
-          >
-            Reject All
-          </Button>
-          <Button type="button" onClick={savePreferences}>
-            Save Preferences
-          </Button>
-        </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -89,12 +89,45 @@ section {
 
 /* Custom card background styles */
 .card-background {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(229, 231, 235, 1);
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
   backdrop-filter: blur(4px);
 }
 
 .dark .card-background {
-  background-color: rgba(31, 41, 55, 0.8);
-  border: 1px solid rgba(55, 65, 81, 1);
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  backdrop-filter: blur(4px);
+}
+
+/* Timeline custom styles */
+.timeline-dot {
+  position: relative;
+  z-index: 10;
+  width: 3rem !important;
+  height: 3rem !important;
+  border-radius: 9999px;
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dark .timeline-dot {
+  background-color: hsl(var(--background));
+  border-color: hsl(var(--border));
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Timeline line styles */
+[role="separator"] {
+  background-color: hsl(var(--border));
+  min-height: 6rem !important;
+}
+
+.dark [role="separator"] {
+  background-color: hsl(var(--border));
 }

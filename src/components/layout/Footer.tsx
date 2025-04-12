@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white dark:bg-black">
+    <footer className="bg-gray-900 text-white dark:bg-gray-950">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <motion.div
           className="grid md:grid-cols-3 gap-8"
@@ -15,7 +15,7 @@ export default function Footer() {
         >
           <div>
             <h4 className="font-bold mb-4">Cristian-Robert Iosef</h4>
-            <p className="text-gray-400">Senior QA Automation Engineer</p>
+            <p className="text-gray-400 dark:text-gray-400">Senior QA Automation Engineer</p>
           </div>
 
           <div>
@@ -25,13 +25,13 @@ export default function Footer() {
                 href="https://linkedin.com/in/cristian-robert-iosef"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 dark:text-gray-400 hover:text-white"
               >
                 LinkedIn
               </a>
               <a
                 href="mailto:roby248@live.com"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 dark:text-gray-400 hover:text-white"
               >
                 Email
               </a>
@@ -41,24 +41,24 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-4">Navigation</h4>
             <div className="space-y-2">
-              <a href="#about" className="block text-gray-400 hover:text-white">
+              <a href="#about" className="block text-gray-400 dark:text-gray-400 hover:text-white">
                 About
               </a>
               <a
                 href="#experience"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 dark:text-gray-400 hover:text-white"
               >
                 Experience
               </a>
               <a
                 href="#skills"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 dark:text-gray-400 hover:text-white"
               >
                 Skills
               </a>
               <a
                 href="#contact"
-                className="block text-gray-400 hover:text-white"
+                className="block text-gray-400 dark:text-gray-400 hover:text-white"
               >
                 Contact
               </a>
@@ -67,7 +67,7 @@ export default function Footer() {
         </motion.div>
 
         <motion.div
-          className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400"
+          className="border-t border-gray-800 dark:border-gray-800 mt-8 pt-8 text-center text-gray-400 dark:text-gray-400"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

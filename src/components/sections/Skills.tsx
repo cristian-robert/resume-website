@@ -80,12 +80,12 @@ export default function Skills() {
           className="mb-8"
         >
           <Tabs defaultValue="all" className="w-full" onValueChange={setActiveCategory}>
-            <TabsList className="flex flex-wrap justify-center mb-8">
+            <TabsList className="flex flex-wrap justify-center mb-8 bg-muted/50 p-1 rounded-lg">
               {categories.map((category) => (
                 <TabsTrigger
                   key={category}
                   value={category}
-                  className="capitalize"
+                  className="capitalize px-4 py-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
                 >
                   {category}
                 </TabsTrigger>
@@ -119,8 +119,8 @@ export default function Skills() {
                                       onMouseLeave={() => setHoveredSkill(null)}
                                     >
                                       <Badge
-                                        variant={hoveredSkill === skill ? "default" : "secondary"}
-                                        className="cursor-pointer transition-colors duration-300"
+                                        variant={hoveredSkill === skill ? "default" : "outline"}
+                                        className="cursor-pointer transition-all duration-300 text-sm py-1 px-3 hover:shadow-sm"
                                       >
                                         {skill}
                                       </Badge>

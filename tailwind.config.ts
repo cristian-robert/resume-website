@@ -7,7 +7,7 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: ["class", "class"],
+  darkMode: "class",
   theme: {
   	container: {
   		center: true,
@@ -114,8 +114,8 @@ const config: Config = {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'gradient-x': 'gradient-x 15s ease infinite',
-  			'blob': 'blob 7s infinite',
-  			'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+  			blob: 'blob 7s infinite',
+  			pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
   		},
   		typography: {
   			DEFAULT: {

@@ -15,10 +15,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
+    // Check for system preference first
+    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+
+    // Use saved theme or system preference
+    const themeToSet = savedTheme || (systemPrefersDark ? "dark" : "light");
+    setTheme(themeToSet);
+
+    // Remove both classes first to ensure clean state
+    document.documentElement.classList.remove("light", "dark");
+    // Add the appropriate class
+    document.documentElement.classList.add(themeToSet);
+
+    // If no saved theme, save the system preference
+    if (!savedTheme) {
+      localStorage.setItem("theme", themeToSet);
     }
   }, []);
 
@@ -26,7 +38,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
-    document.documentElement.classList.toggle("dark");
+
+    // Remove both classes first to ensure clean state
+    document.documentElement.classList.remove("light", "dark");
+    // Add the appropriate class
+    document.documentElement.classList.add(newTheme);
+
+    // Force a re-render of the page to ensure all styles are applied
+    document.body.style.colorScheme = newTheme;
   };
 
   return (

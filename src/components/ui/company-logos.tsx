@@ -30,7 +30,7 @@ export function CompanyLogo({ company, className = "", size = 24 }: CompanyLogoP
     // Logo-specific adjustments
     if (companyLower.includes("deutsche bank")) {
       return (
-        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-background" style={containerStyle}>
           <Image
             src="/dblogo.png"
             alt="Deutsche Bank"
@@ -42,7 +42,7 @@ export function CompanyLogo({ company, className = "", size = 24 }: CompanyLogoP
       );
     } else if (companyLower.includes("twispay")) {
       return (
-        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-background" style={containerStyle}>
           <Image
             src="/twispaylogo.jpeg"
             alt="Twispay"
@@ -54,7 +54,7 @@ export function CompanyLogo({ company, className = "", size = 24 }: CompanyLogoP
       );
     } else if (companyLower.includes("2checkout") || companyLower.includes("verifone")) {
       return (
-        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-background" style={containerStyle}>
           <Image
             src="/2checkout.png"
             alt="2Checkout"
@@ -66,7 +66,7 @@ export function CompanyLogo({ company, className = "", size = 24 }: CompanyLogoP
       );
     } else if (companyLower.includes("emag")) {
       return (
-        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-background" style={containerStyle}>
           <Image
             src="/emaglogo.avif"
             alt="eMAG"
@@ -78,7 +78,7 @@ export function CompanyLogo({ company, className = "", size = 24 }: CompanyLogoP
       );
     } else if (companyLower.includes("ubisoft")) {
       return (
-        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white" style={containerStyle}>
+        <div className="relative rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-background" style={containerStyle}>
           <Image
             src="/ubisoftlogo.png"
             alt="Ubisoft"
