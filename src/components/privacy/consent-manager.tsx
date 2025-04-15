@@ -84,10 +84,11 @@ export default function ConsentManager() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          variant="outline"
-          size="sm"
-          className="fixed bottom-4 left-4 z-50"
+          variant="ghost"
+          size="lg"
+          className="fixed bottom-4 left-4 z-50 rounded-full px-5 py-2 bg-white/90 text-black shadow-lg border border-gray-200 hover:bg-white flex items-center gap-2"
         >
+          <span role="img" aria-label="cookie">🍪</span>
           Cookie Settings
         </Button>
       </DialogTrigger>

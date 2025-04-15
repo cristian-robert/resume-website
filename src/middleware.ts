@@ -1,17 +1,8 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
- 
-export default clerkMiddleware({
-  publicRoutes: [
-    "/",
-    "/about",
-    "/#experience", 
-    "/#skills", 
-    "/#contact",
-    "/api/public(.*)",
-    "/api/auth/(.*)"
-  ],
-});
- 
+
+// Make all routes public for now, protection will be added later as needed.
+export default clerkMiddleware();
+
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };

@@ -11,10 +11,8 @@ export default function SectionLayout({ children, id, className = "" }: SectionL
   return (
     <section
       id={id}
-      className={`relative py-20 ${className}`}
+      className={`relative py-20 text-white ${className}`}
     >
-      {/* Background removed to use aurora background */}
-
       <div className="container mx-auto px-4">
         {children}
       </div>

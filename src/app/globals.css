@@ -7,58 +7,27 @@
     --transparent: transparent;
     --white: 255, 255, 255;
     --black: 0, 0, 0;
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    /* Make card background more opaque for text readability */
+    --card: 0 0% 0% / 0.7;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0% / 0.9;
+    --popover-foreground: 0 0% 100%;
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
-
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted-foreground: 210 40% 80%;
     --accent: 0 0% 14.9%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
+    --border: 0 0% 30%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --radius: 0.5rem;
   }
 }
 
@@ -67,19 +36,26 @@
     @apply border-[hsl(var(--border))];
   }
   body {
-    @apply bg-transparent text-foreground;
+    @apply bg-transparent text-white;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
+.transparent-card {
+  background-color: rgba(20, 20, 25, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
 html {
-  scroll-snap-type: y proximity;
+  /* scroll-snap-type: y proximity; */
   scroll-behavior: smooth;
 }
 
 section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  /* scroll-snap-align: start;
+  scroll-snap-stop: always; */
 }
 
 .animation-delay-2000 {
@@ -90,17 +66,11 @@ section {
   animation-delay: 4s;
 }
 
-/* Custom card background styles */
 .card-background {
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  backdrop-filter: blur(4px);
-}
-
-.dark .card-background {
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  backdrop-filter: blur(4px);
+  background-color: rgba(20, 20, 25, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  color: white;
 }
 
 /* Timeline custom styles */
@@ -168,16 +138,10 @@ section {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
   grid-column: 1 !important;
   grid-row: 1 !important;
   justify-self: start !important;
-}
-
-.dark .timeline-dot {
-  background-color: hsl(var(--background));
-  border-color: hsl(var(--border));
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Timeline line styles */
@@ -197,10 +161,6 @@ section {
   grid-template-columns: var(--dot-size) 1fr !important;
 }
 
-.dark .timeline-custom [role="separator"] {
-  background-color: hsl(var(--border));
-}
-
 /* Content positioning */
 .timeline-custom [class*="timelineContent"] {
   grid-column: 2 !important;
@@ -213,4 +173,118 @@ section {
   grid-column: 2 !important;
   text-align: left !important;
   margin-left: 0 !important;
+  color: white;
 }
+
+/* Clerk UserProfile Modal Background Override */
+.cl-modalContentBox {
+  background-color: rgba(40, 40, 50, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(80, 80, 100, 0.25) !important;
+  border-radius: 0.5rem !important;
+  color: white !important;
+}
+
+/* 1. Force UserProfile Background (Targeted) */
+/* Assuming inspection revealed .cl-userProfile-root and .cl-modalContentBox */
+.cl-userProfile-root, .cl-modalContentBox {
+    background-color: rgba(40, 40, 50, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1.5px solid rgba(80, 80, 100, 0.25) !important;
+    border-radius: 0.5rem !important;
+    color: white !important;
+}
+/* Ensure inner sections don't override */
+.cl-userProfile-root .cl-profileSection,
+.cl-modalContentBox .cl-profileSection {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+/* Ensure text within the profile is white */
+.cl-userProfile-root *, .cl-modalContentBox * {
+    color: white !important;
+}
+.cl-profileSectionItem:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+/* Remove previous broader text overrides if they conflict */
+
+/* 2. Fix Login Dropdown Background (Targeted) */
+/* Assuming inspection revealed .cl-signIn-root */
+.cl-signIn-root {
+   background: transparent !important;
+   box-shadow: none !important;
+   border: none !important;
+}
+/* Keep input styling from previous attempts if needed */
+.cl-formFieldInput {
+   background-color: rgba(255,255,255,0.08) !important;
+   color: white !important; /* Input text color */
+   border-color: #4b5563 !important;
+}
+.cl-socialButtonsBlockButton {
+    background-color: rgba(255,255,255,0.08) !important;
+    border: 1.5px solid rgba(255,255,255,0.18) !important;
+    color: white !important;
+    box-shadow: 0 1.5px 6px 0 rgba(0,0,0,0.10) !important;
+    transition: all 0.2s !important;
+}
+.cl-socialButtonsBlockButton:hover {
+    background-color: rgba(255,255,255,0.16) !important;
+    border-color: rgba(255,255,255,0.28) !important;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.18) !important;
+}
+.cl-socialButtonsIcon {
+    color: white !important;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.18));
+}
+/* 3. Hide Redundant Register Link (Targeted) */
+/* Assuming inspection revealed a path like this */
+.cl-signIn-root .cl-footerActionLink:last-child {
+    display: none !important;
+}
+
+/* Enhanced Clerk Auth Modal Styling */
+.cl-card {
+  background-color: rgba(40, 40, 50, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1.5px solid rgba(80, 80, 100, 0.25) !important;
+  color: white !important;
+}
+
+.cl-socialButtons {
+  @apply gap-3;
+}
+
+.cl-socialButtonsBlockButton {
+  @apply transition-all duration-200 hover:scale-105;
+}
+
+.cl-formFieldInput {
+  @apply transition-all duration-200;
+}
+
+.cl-footerActionText {
+  @apply text-gray-400;
+}
+
+.cl-footerActionLink {
+  @apply text-blue-500 hover:text-blue-400 transition-colors duration-200 !important;
+}
+
+/* Show the sign up link in footer */
+.cl-signIn-root .cl-footerActionLink:last-child {
+  display: inline !important;
+  @apply ml-1 font-medium text-blue-500 hover:text-blue-400 transition-colors;
+}
+
+/* Enhance social buttons layout */
+.cl-socialButtonsBlock {
+  @apply grid grid-cols-3 gap-2;
+}
+
+/* Improve input field focus states */
+.cl-formFieldInput:focus {
+  @apply ring-2 ring-blue-500 ring-opacity-50;
+}
+

@@ -5,7 +5,6 @@ import { useSkills } from "@/hooks/useSkills";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import SectionLayout from "@/components/layout/SectionLayout";
 import LoadingState from "../ui/LoadingState";
@@ -57,94 +56,83 @@ export default function Skills() {
 
   return (
     <SectionLayout id="skills">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+      <motion.div
+        initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="w-full"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
             Skills & Certifications
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-gray-300 max-w-2xl mx-auto">
             Technical expertise and professional certifications acquired throughout my career
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
-        >
-          <Tabs defaultValue="all" className="w-full" onValueChange={setActiveCategory}>
-            <TabsList className="flex flex-wrap justify-center mb-8 bg-muted/50 p-1 rounded-lg">
-              {categories.map((category) => (
-                <TabsTrigger
-                  key={category}
-                  value={category}
-                  className="capitalize px-4 py-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
-                >
-                  {category}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+        <Tabs defaultValue="all" className="w-full" onValueChange={setActiveCategory}>
+          <TabsList className="flex flex-wrap justify-center mb-8 bg-black/50 p-1 rounded-lg">
+            {categories.map((category) => (
+              <TabsTrigger
+                key={category}
+                value={category}
+                className="capitalize px-4 py-2 text-gray-300 data-[state=active]:bg-primary/80 data-[state=active]:text-white"
+              >
+                {category}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-            <TabsContent value={activeCategory} className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <AnimatePresence>
-                  {filteredSkills?.map((skillGroup, index) => (
-                    <motion.div
-                      key={skillGroup.category}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                    >
-                      <Card className="h-full overflow-hidden hover:shadow-md transition-shadow duration-300 card-background">
-                        <CardHeader className="bg-muted/50">
-                          <CardTitle className="text-xl">{skillGroup.category}</CardTitle>
-                        </CardHeader>
-                        <CardContent className="pt-6">
-                          <div className="flex flex-wrap gap-2">
-                            {skillGroup.items.map((skill, idx) => (
-                              <TooltipProvider key={idx}>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <div
-                                      className="space-y-1"
-                                      onMouseEnter={() => setHoveredSkill(skill)}
-                                      onMouseLeave={() => setHoveredSkill(null)}
-                                    >
-                                      <Badge
-                                        variant={hoveredSkill === skill ? "default" : "outline"}
-                                        className="cursor-pointer transition-all duration-300 text-sm py-1 px-3 hover:shadow-sm"
-                                      >
-                                        {skill}
-                                      </Badge>
-                                    </div>
-                                  </TooltipTrigger>
-                                  <TooltipContent side="top" className="max-w-xs">
-                                    <div className="space-y-1">
-                                      <div className="font-medium">{skill} <span className="text-xs text-muted-foreground">({getSkillLevel(skill)})</span></div>
-                                      <p className="text-xs">{getSkillDescription(skill)}</p>
-                                    </div>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            ))}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </TabsContent>
-          </Tabs>
-        </motion.div>
+          <TabsContent value={activeCategory} className="mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <AnimatePresence>
+                {filteredSkills?.map((skillGroup, index) => (
+                  <Card key={skillGroup.category} className="h-full overflow-hidden hover:shadow-md transition-shadow duration-300 card-background">
+                    <CardHeader className="bg-black/50">
+                      <CardTitle className="text-xl">{skillGroup.category}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-6">
+                      <div className="flex flex-wrap gap-2">
+                        {skillGroup.items.map((skill, idx) => (
+                          <TooltipProvider key={idx}>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div
+                                  className="space-y-1"
+                                  onMouseEnter={() => setHoveredSkill(skill)}
+                                  onMouseLeave={() => setHoveredSkill(null)}
+                                >
+                                  <Badge
+                                    variant={hoveredSkill === skill ? "default" : "outline"}
+                                    className="cursor-pointer transition-all duration-300 text-sm py-1 px-3 hover:shadow-sm"
+                                  >
+                                    {skill}
+                                  </Badge>
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent side="top" className="max-w-xs">
+                                <div className="space-y-1">
+                                  <div className="font-medium">{skill} <span className="text-xs text-gray-300">({getSkillLevel(skill)})</span></div>
+                                  <p className="text-xs">{getSkillDescription(skill)}</p>
+                                </div>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </AnimatePresence>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </motion.div>
     </SectionLayout>
   );
 }

@@ -5,10 +5,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white dark:bg-gray-950">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+    <footer className="bg-transparent text-white backdrop-blur-sm">
+      <div className="max-w-5xl mx-auto px-4 py-4">
         <motion.div
-          className="grid md:grid-cols-3 gap-8"
+          className="grid md:grid-cols-3 gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -67,7 +67,7 @@ export default function Footer() {
         </motion.div>
 
         <motion.div
-          className="border-t border-gray-800 dark:border-gray-800 mt-8 pt-8 text-center text-gray-400 dark:text-gray-400"
+          className="border-t border-gray-700 dark:border-gray-800 mt-6 pt-4 text-center text-gray-400 dark:text-gray-400"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
