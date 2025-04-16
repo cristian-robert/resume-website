@@ -7,7 +7,6 @@ import {
   NavbarLogo,
   NavbarButton,
   MobileNavHeader,
-  MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
 import { SignInButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
@@ -27,19 +26,14 @@ export default function AppNavbar() {
   return (
     <div className="relative w-full">
       <Navbar>
-        {/* Desktop Navigation */}
-        <NavBody className="py-2">
+        {/* Desktop Navigation (xl and up) */}
+        <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
             <SignedOut>
-              <SignInButton
-                mode="modal"
-                appearance={clerkAppearance}
-              >
-                <NavbarButton
-                  className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-md text-sm"
-                >
+              <SignInButton mode="modal" appearance={clerkAppearance}>
+                <NavbarButton className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-md text-sm">
                   Login
                 </NavbarButton>
               </SignInButton>
@@ -50,39 +44,20 @@ export default function AppNavbar() {
           </div>
         </NavBody>
 
-        {/* Mobile Navigation */}
+        {/* Mobile and Medium Screen Navigation */}
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
-            <MobileNavToggle
-              isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            />
-          </MobileNavHeader>
-
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-          >
-            {navItems.map((item, idx) => (
-              <a
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300"
+            <div className="flex items-center gap-3">
+              <NavbarButton
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-md text-sm"
               >
-                <span className="block">{item.name}</span>
-              </a>
-            ))}
-            <div className="flex w-full flex-col gap-4">
+                Menu
+              </NavbarButton>
               <SignedOut>
-                <SignInButton
-                  mode="modal"
-                  appearance={clerkAppearance}
-                >
-                  <NavbarButton
-                    className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-md text-sm w-full"
-                  >
+                <SignInButton mode="modal" appearance={clerkAppearance}>
+                  <NavbarButton className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-md text-sm">
                     Login
                   </NavbarButton>
                 </SignInButton>
@@ -90,6 +65,25 @@ export default function AppNavbar() {
               <SignedIn>
                 <UserButton afterSignOutUrl="/" appearance={clerkAppearance} />
               </SignedIn>
+            </div>
+          </MobileNavHeader>
+
+          <MobileNavMenu
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+            className="min-h-[100vh] md:min-h-[50vh]" // Adjusted height for medium screens
+          >
+            <div className="flex flex-col items-center justify-center gap-8 w-full">
+              {navItems.map((item, idx) => (
+                <a
+                  key={`mobile-link-${idx}`}
+                  href={item.link}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-xl md:text-2xl font-semibold text-white hover:text-purple-400 transition-colors"
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
           </MobileNavMenu>
         </MobileNav>
